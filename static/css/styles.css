@@ -1,0 +1,128 @@
+/* static/css/styles.css */
+:root {
+    --primary: #2563eb;       /* Blue */
+    --primary-dark: #1d4ed8;  /* Darker blue */
+    --secondary: #3b82f6;     /* Light blue */
+    --accent: #f0f9ff;        /* Very light blue */
+    --background: #ffffff;    /* White for backgrounds */
+    --background-alt: #8497a9; /* Light gray for alternate backgrounds */
+    --text-dark: #1e293b;     /* Dark gray for text */
+    --text-light: #64748b;    /* Light gray for secondary text */
+    --success: #10b981;       /* Green */
+    --warning: #f59e0b;       /* Yellow */
+    --error: #ef4444;         /* Red */
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Apply the colors to classes */
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.bg-accent {
+    background-color: var(--accent);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.bg-background {
+    background-color: var(--background);
+}
+
+.text-background {
+    color: var(--background);
+}
+
+.text-text {
+    color: var(--text-dark);
+}
+
+.bg-background-alt {
+    background-color: var(--background-alt);
+}
+
+.text-text-light {
+    color: var(--text-light);
+}
+
+p, li, span {
+    font-family: 'Lora', serif;
+}
+
+.tab-content {
+    display: none; /* Hide all tab contents by default */
+}
+
+.tab-content.active {
+    display: block; /* Show active tab content */
+}
+
+
+/* Mobile Menu Styles */
+#mobileMenu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+#mobileMenu.hidden {
+    display: none; /* Hide the menu when the 'hidden' class is applied */
+}
+
+#mobileMenu:not(.hidden) {
+    display: block; /* Show the menu when the 'hidden' class is removed */
+}

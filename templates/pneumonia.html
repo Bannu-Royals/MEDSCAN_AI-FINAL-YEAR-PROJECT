@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pneumonia Detection and Treatment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #3b82f6;
+            --accent: #f0f9ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            min-height: 100vh;
+        }
+        
+        .card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .upload-area {
+            transition: all 0.3s ease;
+            border: 2px dashed var(--secondary);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(240, 249, 255, 0.5);
+        }
+        
+        .upload-area.drag-over {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-6">
+<div class="bg-white rounded-2xl card w-full max-w-4xl overflow-hidden fade-in">
+    <!-- Header with medical icon -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-500 p-6 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4 pulse">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white">Pneumonia Detection System</h1>
+        <p class="text-blue-100 mt-2">Upload a chest X-ray for AI-powered pneumonia detection</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="p-6 sm:p-8">
+        <!-- Pneumonia Detection Form -->
+        <form method="POST" enctype="multipart/form-data" class="space-y-6 bg-blue-50/50 p-6 rounded-xl">
+            <!-- Drag and Drop Area -->
+            <div id="dropzone" class="flex flex-col items-center justify-center w-full h-40 upload-area rounded-xl cursor-pointer">
+                <input type="file" id="file" name="file" accept="image/*" required class="hidden" />
+                <div class="flex flex-col items-center justify-center text-center">
+                    <svg class="w-12 h-12 text-blue-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="text-sm text-blue-600 font-medium">
+                        <span class="font-semibold">Click to upload</span> or drag and drop
+                    </p>
+                    <p class="text-xs text-blue-400 mt-1">JPEG, PNG (MAX: 5MB)</p>
+                </div>
+            </div>
+
+            <!-- File Name Display -->
+            <p id="file-name" class="text-sm text-blue-600 text-center"></p>
+
+            <button type="submit"
+                class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Analyze X-ray
+            </button>
+        </form>
+
+        <!-- Display Pneumonia Result -->
+        {% if pneumonia_result %}
+        <div class="mt-8 p-6 bg-white rounded-xl shadow-sm border border-blue-100 fade-in">
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <!-- Uploaded Image -->
+                {% if uploaded_image_base64 %}
+                <div class="w-full md:w-1/3">
+                    <img src="data:image/png;base64,{{ uploaded_image_base64 }}" alt="Uploaded X-ray"
+                        class="w-full h-auto object-cover rounded-lg border border-blue-200 shadow-sm">
+                </div>
+                {% endif %}
+
+                <!-- Result -->
+                <div class="w-full md:w-2/3 space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-semibold text-blue-800">Analysis Result</h3>
+                        <div class="flex items-center">
+                            <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold 
+                                {% if 'Pneumonia' in pneumonia_result %}bg-red-100 text-red-800
+                                {% else %}bg-green-100 text-green-800{% endif %}">
+                                {{ pneumonia_result }}
+                            </span>
+                        </div>
+                        <p class="text-blue-700">
+                            <span class="font-medium">Confidence:</span> {{ confidence }}%
+                        </p>
+                    </div>
+
+                    <!-- "Get Recommendation" Button -->
+                    {% if show_recommendation_button %}
+                    <form method="POST" class="pt-2">
+                        <input type="hidden" name="get_recommendation" value="true">
+                        <input type="hidden" name="uploaded_image_base64" value="{{ uploaded_image_base64 }}">
+                        <button type="submit"
+                            class="w-full bg-green-600 text-white py-2.5 rounded-lg font-semibold hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                            Get Treatment Recommendation
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Recommendation Form Section -->
+        {% if show_recommendation_form %}
+        <div class="mt-8 p-6 bg-white rounded-xl shadow-sm border border-blue-100 fade-in">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-blue-800">Treatment Recommendation</h2>
+                <p class="text-blue-600">Provide patient details for personalized treatment plan</p>
+            </div>
+            
+            <form method="POST" class="space-y-6">
+                <input type="hidden" name="uploaded_image_base64" value="{{ uploaded_image_base64 }}">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Age -->
+                    <div>
+                        <label for="age" class="block text-sm font-medium text-blue-700 mb-2">Age</label>
+                        <input type="number" id="age" name="age" required min="1" max="120"
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-blue-300">
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label for="gender" class="block text-sm font-medium text-blue-700 mb-2">Gender</label>
+                        <select id="gender" name="gender" required
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <!-- Pregnancy Status -->
+                    <div>
+                        <label for="pregnancy_status" class="block text-sm font-medium text-blue-700 mb-2">Pregnancy Status</label>
+                        <select id="pregnancy_status" name="pregnancy_status" required
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Select status</option>
+                            <option value="Pregnant">Pregnant</option>
+                            <option value="Not Pregnant">Not Pregnant</option>
+                            <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                    </div>
+
+                    <!-- Smoking History -->
+                    <div>
+                        <label for="smoking_history" class="block text-sm font-medium text-blue-700 mb-2">Smoking History</label>
+                        <select id="smoking_history" name="smoking_history" required
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Select history</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Previous Antibiotic Use -->
+                    <div>
+                        <label for="previous_antibiotic_use" class="block text-sm font-medium text-blue-700 mb-2">Previous Antibiotic Use</label>
+                        <select id="previous_antibiotic_use" name="previous_antibiotic_use" required
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Select antibiotic</option>
+                            <option value="None">None</option>
+                            <option value="Azithromycin resistance">Azithromycin resistance</option>
+                            <option value="Amoxicillin resistance">Amoxicillin resistance</option>
+                            <option value="Levofloxacin resistance">Levofloxacin resistance</option>
+                        </select>
+                    </div>
+
+                    <!-- Hospitalization Status -->
+                    <div>
+                        <label for="hospitalization_status" class="block text-sm font-medium text-blue-700 mb-2">Hospitalization Status</label>
+                        <select id="hospitalization_status" name="hospitalization_status" required
+                            class="w-full px-4 py-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="" disabled selected>Select status</option>
+                            <option value="Outpatient">Outpatient</option>
+                            <option value="Hospitalized">Hospitalized</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Generate Treatment Plan
+                </button>
+            </form>
+
+            <!-- Recommendation Output -->
+            {% if recommended_treatment %}
+            <div class="mt-8 p-6 bg-blue-50 rounded-lg fade-in">
+                <h3 class="text-xl font-semibold text-blue-800 mb-4">Recommended Treatment Plan</h3>
+                <div class="flex flex-col md:flex-row gap-6">
+                    {% if uploaded_image_base64 %}
+                    <div class="w-full md:w-1/3">
+                        <img src="data:image/png;base64,{{ uploaded_image_base64 }}" alt="Uploaded X-ray"
+                            class="w-full h-auto object-contain rounded-lg border border-blue-200 shadow-sm">
+                    </div>
+                    {% endif %}
+                    <div class="w-full md:w-2/3 space-y-3">
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-blue-100">
+                            <p class="font-medium text-blue-700">Treatment:</p>
+                            <p class="text-blue-800 font-semibold">{{ recommended_treatment }}</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-blue-100">
+                            <p class="font-medium text-blue-700">Dosage:</p>
+                            <p class="text-blue-800 font-semibold">{{ recommended_pills }} pills per day</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-blue-100">
+                            <p class="font-medium text-blue-700">Duration:</p>
+                            <p class="text-blue-800 font-semibold">{{ recommended_days }} days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-blue-100/50 rounded-lg">
+                    <p class="text-xs text-blue-600">Note: This recommendation is generated by AI and should be reviewed by a medical professional before implementation.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Footer -->
+    <div class="bg-blue-50 p-4 text-center">
+        <p class="text-sm text-blue-600">© 2023 Pneumonia Detection System | For medical professionals</p>
+    </div>
+</div>
+
+<script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    // Open file dialog when clicked
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    // Handle drag over
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('drag-over');
+    });
+
+    // Handle drag leave
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('drag-over');
+    });
+
+    // Handle file drop
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('drag-over');
+
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            updateFileName(e.dataTransfer.files[0].name);
+        }
+    });
+
+    // Handle file input change
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            updateFileName(e.target.files[0].name);
+        }
+    });
+
+    // Update file name display
+    function updateFileName(name) {
+        fileNameDisplay.textContent = `Selected: ${name}`;
+        fileNameDisplay.classList.add('text-blue-600', 'font-medium');
+    }
+</script>
+</body>
+</html>

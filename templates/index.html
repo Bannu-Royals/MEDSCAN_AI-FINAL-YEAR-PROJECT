@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medscan AI | Advanced Medical Imaging Analysis</title>
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+</head>
+<body>
+    <header class="navbar fixed top-0 w-full z-50 px-4 py-3 shadow-md bg-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-blue-600">Medscan</span>
+                <span class="text-2xl font-bold bg-blue-600 text-white px-2 rounded">AI</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-800 hover:text-blue-600 transition-colors">Home</a>
+                <a href="#about" class="text-gray-800 hover:text-blue-600 transition-colors">About</a>
+                <a href="#services" class="text-gray-800 hover:text-blue-600 transition-colors">Services</a>
+                <a href="#team" class="text-gray-800 hover:text-blue-600 transition-colors">Team</a>
+                <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center space-x-4">
+                <button id="mobileMenuButton" class="md:hidden text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-gray-800 hover:text-blue-600 transition-colors">Home</a>
+                <a href="#about" class="text-gray-800 hover:text-blue-600 transition-colors">About</a>
+                <a href="#services" class="text-gray-800 hover:text-blue-600 transition-colors">Services</a>
+                <a href="#team" class="text-gray-800 hover:text-blue-600 transition-colors">Team</a>
+                <a href="#contact" class="text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 relative bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary)] overflow-hidden">
+        <div class="absolute opacity-10">
+            <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent"></div>
+            <img src="{{ url_for('static', filename='images/project-image.jpg') }}" alt="Medical Background" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="container mx-auto px-4 py-20 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fadeInUp">
+                        Advanced <span class="text-[var(--accent)]">AI-Powered</span> Medical Diagnostics
+                    </h1>
+                    <p class="text-xl text-[var(--accent)] mb-8 animate-fadeInUp animate-delay-100">
+                        Revolutionizing healthcare with cutting-edge machine learning for accurate pneumonia and brain tumor detection.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp animate-delay-200">
+                        <a href="#services" class="btn-primary">Explore Services</a>
+                        <a href="#about" class="btn-secondary">Learn More</a>
+                    </div>
+                    
+                    <div class="mt-12 grid grid-cols-3 gap-6 animate-fadeInUp animate-delay-300">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white counter" data-target="98">0</div>
+                            <p class="text-[var(--accent)]">Accuracy Rate</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white counter" data-target="10000">0</div>
+                            <p class="text-[var(--accent)]">Scans Analyzed</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white counter" data-target="150">0</div>
+                            <p class="text-[var(--accent)]">Medical Partners</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block animate-fadeInUp animate-delay-200">
+                    <img src="{{ url_for('static', filename='images/project-image.jpg') }}" alt="Medscan AI Dashboard" class="rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+        
+        <svg class="w-full h-16 text-white fill-current" viewBox="0 0 1440 96" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 96L60 85.3C120 75 240 53 360 53.3C480 53 600 75 720 80C840 85 960 75 1080 64C1200 53 1320 43 1380 37.3L1440 32V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V96Z"></path>
+        </svg>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-[var(--accent)]">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <span class="text-[var(--primary)] font-semibold uppercase tracking-wide">About Us</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Pioneering Medical AI Technology</h2>
+                <p class="max-w-3xl mx-auto text-[var(--text-light)]">
+                    Medscan AI combines advanced machine learning with medical expertise to provide accurate diagnoses and improve patient outcomes worldwide.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-[var(--primary)] opacity-10 rounded-lg"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-[var(--primary)] opacity-10 rounded-lg"></div>
+                    <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="About Medscan AI" class="rounded-lg shadow-lg relative z-10">
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                    <p class="text-[var(--text-dark)] mb-4">
+                        At Medscan AI, we're dedicated to revolutionizing medical diagnostics through artificial intelligence. Our platform is designed to detect Pneumonia and Brain Tumors with exceptional accuracy, providing healthcare professionals with powerful tools to improve patient care.
+                    </p>
+                    <p class="text-[var(--text-dark)] mb-6">
+                        With state-of-the-art machine learning algorithms, Medscan AI helps healthcare professionals make informed decisions and recommend effective treatments, ultimately saving lives through early and accurate detection.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-[var(--primary)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">High Accuracy</h4>
+                                <p class="text-sm text-[var(--text-light)]">98% accurate in clinical trials</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-[var(--primary)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Fast Results</h4>
+                                <p class="text-sm text-[var(--text-light)]">Diagnoses in seconds, not days</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-[var(--primary)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Data Insights</h4>
+                                <p class="text-sm text-[var(--text-light)]">Comprehensive analysis reports</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-[var(--primary)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">HIPAA Compliant</h4>
+                                <p class="text-sm text-[var(--text-light)]">Secure patient data handling</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-background-alt">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary font-semibold uppercase tracking-wide">Our Services</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 text-text">Advanced Diagnostic Solutions</h2>
+                <p class="max-w-3xl mx-auto text-black">Our AI-powered platform offers precise detection and analysis of common and critical medical conditions.</p>
+            </div>
+            
+            <div class="flex justify-center mb-12 reveal">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button type="button" class="service-tab active px-5 py-3 text-sm font-medium bg-background text-primary border border-primary rounded-l-lg hover:bg-accent focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary-dark" data-tab="pneumonia">
+                        Pneumonia Detection
+                    </button>
+                    <button type="button" class="service-tab px-5 py-3 text-sm font-medium bg-background text-text-light border border-gray-300 rounded-r-lg hover:bg-accent hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary-dark" data-tab="tumor">
+                        Brain Tumor Detection
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Pneumonia Tab Content -->
+            <div id="pneumonia-content" class="tab-content active">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal">
+                    <div class="lg:col-span-1">
+                        <div class="bg-background rounded-xl shadow-lg overflow-hidden">
+                            <div class="p-8">
+                                <div class="w-12 h-12 rounded-full bg-accent text-primary flex items-center justify-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-text">Understanding Pneumonia</h3>
+                                <p class="text-text-light mb-4">
+                                    Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid or pus, causing symptoms like cough, fever, chills, and difficulty breathing.
+                                </p>
+                                
+                                <h4 class="font-semibold text-lg mb-2 text-text">Common Causes:</h4>
+                                <ul class="text-text-light mb-6 space-y-2">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Bacteria (e.g., Streptococcus pneumoniae)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Viruses (e.g., Influenza)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Fungi (in immunocompromised patients)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Aspiration (inhaling food or liquids)</span>
+                                    </li>
+                                </ul>
+                                
+                                <h4 class="font-semibold text-lg mb-2 text-text">Treatments:</h4>
+                                <ul class="text-text-light space-y-2">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Antibiotics</strong> for bacterial pneumonia</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Antiviral medications</strong> for viral pneumonia</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Antifungal medications</strong> for fungal pneumonia</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2">
+                        <div class="bg-background rounded-xl shadow-lg overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-xl font-bold mb-4 text-text">How Medscan AI Detects Pneumonia</h3>
+                                <p class="text-text-light mb-6">
+                                    Our advanced deep learning algorithms analyze chest X-rays to identify patterns and opacities associated with pneumonia. The system provides rapid, accurate results with detailed visualization of affected areas.
+                                </p>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Pneumonia-images/pneumonia-no.jpeg') }}" alt="Normal Chest X-ray" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Normal X-ray</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                A healthy chest X-ray with no signs of pneumonia.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Pneumonia-images/pneumonia-yes.jpeg') }}" alt="Pneumonia Chest X-ray" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Pneumonia X-ray</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                An X-ray showing signs of pneumonia with lung opacities.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Pneumonia-images/pneumonia-yes.jpeg') }}" alt="Severe Pneumonia Chest X-ray" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Severe Pneumonia</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                An X-ray showing severe pneumonia with extensive lung involvement.
+                                            </p>
+                                        </div>
+                                    </div> 
+                                </div>
+                                
+                                <div class="flex justify-center">
+                                    <a href="/pneumonia" class="btn-primary">Try Pneumonia Detection</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Brain Tumor Tab Content -->
+            <div id="tumor-content" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal">
+                    <div class="lg:col-span-1">
+                        <div class="bg-background rounded-xl shadow-lg overflow-hidden">
+                            <div class="p-8">
+                                <div class="w-12 h-12 rounded-full bg-accent text-primary flex items-center justify-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-text">Understanding Brain Tumors</h3>
+                                <p class="text-text-light mb-4">
+                                    Brain tumors are abnormal growths of cells in the brain, which can be benign or malignant. They can cause symptoms like headaches, seizures, and cognitive changes.
+                                </p>
+                                
+                                <h4 class="font-semibold text-lg mb-2 text-text">Common Types:</h4>
+                                <ul class="text-text-light mb-6 space-y-2">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Gliomas (e.g., Astrocytoma, Glioblastoma)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Meningiomas (tumors in the meninges)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span>Pituitary tumors (affecting the pituitary gland)</span>
+                                    </li>
+                                </ul>
+                                
+                                <h4 class="font-semibold text-lg mb-2 text-text">Treatments:</h4>
+                                <ul class="text-text-light space-y-2">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Surgery</strong> to remove the tumor</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Radiation therapy</strong> to shrink the tumor</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span><strong>Chemotherapy</strong> to target cancer cells</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2">
+                        <div class="bg-background rounded-xl shadow-lg overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-xl font-bold mb-4 text-text">How Medscan AI Detects Brain Tumors</h3>
+                                <p class="text-text-light mb-6">
+                                    Our AI analyzes MRI scans to detect brain tumors with high precision. It identifies tumor location, size, and type, providing detailed insights for treatment planning.
+                                </p>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Tumor-images/tumor-no.jpg') }}" alt="Normal Brain MRI" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Normal MRI</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                A healthy brain MRI with no signs of tumors.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Tumor-images/tumor-yes.jpg') }}" alt="Brain Tumor MRI" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Tumor MRI</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                An MRI showing a brain tumor with clear boundaries.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="relative group overflow-hidden rounded-lg">
+                                        <img src="{{ url_for('static', filename='images/Tumor-images/3.jpg') }}" alt="Severe Brain Tumor MRI" class="w-full h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                            <h4 class="text-sm font-semibold">Severe Tumor</h4>
+                                            <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                An MRI showing a large, complex brain tumor.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-center">
+                                    <a href="/tumor" class="btn-primary">Try Tumor Detection</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <span class="text-blue-600 font-semibold uppercase tracking-wide">Our Team</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Meet the Experts</h2>
+                <p class="max-w-3xl mx-auto text-gray-600">Our team of dedicated professionals combines expertise in AI, medicine, and software development to deliver cutting-edge solutions.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+                <!-- Team Member 1 -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden text-center hover:shadow-xl transition-shadow duration-300">
+                    <img src="{{ url_for('static', filename='images/team-member1.jpg') }}" alt="John Doe" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">John Doe</h3>
+                        <p class="text-gray-600 mb-4">AI Engineer</p>
+                        <div class="team-details">
+                            <p class="text-sm text-gray-600 mb-4">
+                                John specializes in developing deep learning models for medical imaging analysis.
+                            </p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden text-center hover:shadow-xl transition-shadow duration-300">
+                    <img src="{{ url_for('static', filename='images/team-member2.jpg') }}" alt="Jane Smith" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Jane Smith</h3>
+                        <p class="text-gray-600 mb-4">Data Scientist</p>
+                        <div class="team-details">
+                            <p class="text-sm text-gray-600 mb-4">
+                                Jane focuses on data preprocessing and model optimization for accurate diagnostics.
+                            </p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden text-center hover:shadow-xl transition-shadow duration-300">
+                    <img src="{{ url_for('static', filename='images/team-member3.jpg') }}" alt="Alice Johnson" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Alice Johnson</h3>
+                        <p class="text-gray-600 mb-4">Frontend Developer</p>
+                        <div class="team-details">
+                            <p class="text-sm text-gray-600 mb-4">
+                                Alice designs intuitive user interfaces for seamless user experiences.
+                            </p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-card bg-white rounded-xl shadow-lg overflow-hidden text-center hover:shadow-xl transition-shadow duration-300">
+                    <img src="{{ url_for('static', filename='images/team-member4.jpg') }}" alt="Bob Williams" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Bob Williams</h3>
+                        <p class="text-gray-600 mb-4">Backend Developer</p>
+                        <div class="team-details">
+                            <p class="text-sm text-gray-600 mb-4">
+                                Bob ensures robust and scalable backend systems for our platform.
+                            </p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <span class="text-blue-600 font-semibold uppercase tracking-wide">Contact Us</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4">Get in Touch</h2>
+                <p class="max-w-3xl mx-auto text-gray-600">Have questions or need support? Reach out to our team for assistance.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 reveal">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <form>
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn-primary">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-blue-600">
+                                <i class="fas fa-map-marker-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Address</h4>
+                                <p class="text-gray-600">123 Medical AI Street, Tech City, TX 75001</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="text-blue-600">
+                                <i class="fas fa-phone-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Phone</h4>
+                                <p class="text-gray-600">+1 (123) 456-7890</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="text-blue-600">
+                                <i class="fas fa-envelope text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-gray-600">support@medscanai.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About Column -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">About Medscan AI</h3>
+                    <p class="text-sm text-gray-400">
+                        Medscan AI is a leading provider of AI-powered medical diagnostics, revolutionizing healthcare with cutting-edge technology.
+                    </p>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">About</a></li>
+                        <li><a href="#services" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Services</a></li>
+                        <li><a href="#team" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Team</a></li>
+                        <li><a href="#contact" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Column -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/pneumonia" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Pneumonia Detection</a></li>
+                        <li><a href="/tumor" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">Brain Tumor Detection</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media Column -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-sm text-gray-400">&copy; 2023 Medscan AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    
+</body>
+</html>
