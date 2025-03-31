@@ -2,11 +2,9 @@ Flask
 numpy
 pandas
 Pillow
-
 scikit-learn
 joblib
 gunicorn==20.1.0
-
-tensorflow-cpu==2.19.0
-torch==2.6.0+cpu
-torchvision==0.21.0+cpu
+tensorflow-cpu==2.19.0  # Explicit CPU-only version
+torch==2.6.0            # Removed "+cpu" (will default to CPU if GPU is disabled)
+torchvision==0.21.0     # Compatible with torch 2.6.0
