@@ -10,6 +10,7 @@ import base64
 import torch
 from torchvision import transforms
 import torch.nn.functional as F
+from serverless_http import handle 
 
 app = Flask(__name__)
 
@@ -263,3 +264,5 @@ def tumor():
                         error=error)
 if __name__ == '__main__':
     app.run(debug=True)
+
+handler = handle(app)
