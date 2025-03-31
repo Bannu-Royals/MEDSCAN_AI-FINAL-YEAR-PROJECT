@@ -2,9 +2,11 @@ Flask
 numpy
 pandas
 Pillow
-tensorflow
-torch
-torchvision
+
 scikit-learn
 joblib
 gunicorn==20.1.0
+
+tensorflow-cpu==2.19.0
+torch==2.6.0+cpu
+torchvision==0.21.0+cpu
