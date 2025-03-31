@@ -261,5 +261,5 @@ def tumor():
                         confidence=confidence,
                         image_data=image_data,
                         error=error)
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=10000)  # Add this line
+if __name__ == '__main__':
+    app.run(debug=True)
