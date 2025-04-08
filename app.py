@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import io
+import os
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -261,5 +262,8 @@ def tumor():
                         confidence=confidence,
                         image_data=image_data,
                         error=error)
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
